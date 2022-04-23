@@ -1,0 +1,21 @@
+services:
+  next_dev:
+    build:
+      target: dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./demo:/srv/dev
+    command: >
+      sh -c "npm install &&
+               npm run dev"
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_USER=default
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
+    ports:
+      - "3600:3600"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
